@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Card NBE</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet" />
+    <style>
+      * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: IDroid, sans-serif;
+}
+
+@font-face {
+  font-family: IDroid;
+  src: url(IDroid.otf);
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #9e9e9e;
+}
+
+.card {
+  position: relative;
+  width: 320px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  animation: fadeIn 0.5s ease-out;
+  transition: box-shadow 0.4s cubic-bezier(.25,.8,.25,1), transform 0.4s cubic-bezier(.25,.8,.25,1);
+}
+.card:hover {
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3), 0 1.5px 8px rgba(255, 20, 147, 0.15);
+  transform: translateY(-8px) scale(1.03) rotateZ(-1deg);
+}
+
+.header {
+  height: 140px;
+  background: #ffd700;
+}
+
+.profile-img {
+  position: absolute;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 5px solid white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  animation: bounceIn 1s cubic-bezier(.68,-0.55,.27,1.55);
+  transition: box-shadow 0.4s, border-color 0.4s;
+}
+.profile-img:hover {
+  box-shadow: 0 0 0 8px #ffd70044, 0 8px 24px rgba(0,0,0,0.18);
+  border-color: #ff1493;
+}
+
+img {
+  object-fit: cover;
+}
+
+.content {
+  padding: 60px 20px 30px;
+  text-align: center;
+  animation: fadeInUp 0.8s 0.2s cubic-bezier(.25,.8,.25,1) both;
+}
+
+.name {
+  font-family: IDroid;
+  font-size: 22px;
+  font-weight: 600;
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.verff {
+  width: 20px;  
+}
+
+.title {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px 0;
+}
+
+/* Social icon halo effect */
+.social-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: transform 0.3s cubic-bezier(.25,.8,.25,1), box-shadow 0.3s;
+  position: relative;
+  overflow: visible;
+}
+.social-icon::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(255,20,147,0.3);
+  transition: box-shadow 0.4s cubic-bezier(.25,.8,.25,1);
+  z-index: 0;
+}
+.social-icon:hover::before {
+  box-shadow: 0 0 16px 8px rgba(255,20,147,0.18);
+}
+.social-icon:hover {
+  transform: scale(1.1);
+  z-index: 1;
+}
+
+.facebook {
+  color: #1877f2;
+}
+
+.instagram {
+  color: #e4405f;
+}
+
+.whatsapp {
+  color: #25d366;
+}
+
+.youtube {
+  color: #ff0000;
+}
+
+.github {
+  color: #333;
+}
+
+.linkedin {
+  color: #0077b5;
+}
+
+/* Subscribe button ripple effect */
+.subscribe-btn {
+  background: #ff1493;
+  color: white;
+  border: none;
+  padding: 12px 40px;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  margin-top: 10px;
+  position: relative;
+  overflow: hidden;
+}
+.subscribe-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 20, 147, 0.3);
+}
+.subscribe-btn:active::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255,255,255,0.4);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: ripple 0.5s linear;
+  pointer-events: none;
+}
+@keyframes ripple {
+  to {
+    width: 200%;
+    height: 200%;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-80px) scale(0.7);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(20px) scale(1.1);
+  }
+  80% {
+    transform: translateY(-8px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 360px) {
+  .card {
+    width: 90%;
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="header"></div>
+      <img src="nbe.jpg" alt="" class="profile-img" />
+      <div class="content">
+        <h2 class="name">
+          NBE NDOMBE ELIE
+          <!-- <i class="fas fa-check-circle verified"></i> -->
+           <img src="verified_acc.png" class="verff">
+        </h2>
+        <p class="title">Développeur full stack</p>
+        <div class="social-links">
+          <a href="https://www.facebook.com/elie.ndombebaimbili" class="social-icon facebook">
+            <i class="fab fa-facebook-f fa-lg"></i>
+          </a>
+          <a href="https://www.instagram.com/ndombeelie/" class="social-icon instagram">
+            <i class="fab fa-instagram fa-lg"></i>
+          </a>
+          <a href="https://wa.me/+243818633683" class="social-icon whatsapp">
+            <i class="fab fa-whatsapp fa-lg"></i>
+          </a>
+          <a href="https://www.youtube.com/@nbendombeelie" class="social-icon youtube">
+            <i class="fab fa-youtube fa-lg"></i>
+          </a>
+          <!-- <a href="#" class="social-icon github">
+            <i class="fab fa-github fa-lg"></i>
+          </a>
+          <a href="#" class="social-icon linkedin">
+            <i class="fab fa-linkedin-in fa-lg"></i>
+          </a> -->
+        </div>
+        <button class="subscribe-btn">s'abonner</button>
+      </div>
+    </div>
+  </body>
+</html>
